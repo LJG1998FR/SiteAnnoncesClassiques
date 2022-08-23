@@ -37,7 +37,7 @@ class AnnonceVoter extends Voter
                 }
                 break;
             case self::DELETE:
-                if ($annonce->getEmail() == $user) {
+                if ($annonce->getTelephone() == $user->getTelephone()) {
                     return true;
                 }
                 break;

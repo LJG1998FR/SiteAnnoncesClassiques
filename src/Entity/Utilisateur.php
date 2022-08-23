@@ -185,6 +185,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     public function __toString(){
-        return $this->getNom().'  '.$this->getPrenom();
+        return $this->getTelephone();
     }
 }
