@@ -132,6 +132,10 @@ class Annonce
         return $this;
     }
 
+    public function __construct(){
+        $this->date=new \Datetime;
+    }
+
     public function __toString(){
         return $this->getId();
     }

@@ -16,9 +16,7 @@ class AnnonceType extends AbstractType
             ->add('titre')
             ->add('texte')
             ->add('image', VichImageType::class)
-            ->add('telephone')
             ->add('codepostal')
-            ->add('date')
         ;
     }
 
