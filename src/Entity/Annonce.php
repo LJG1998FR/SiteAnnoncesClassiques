@@ -5,8 +5,12 @@ namespace App\Entity;
 use App\Repository\AnnonceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
+#[Vich\Uploadable]
+
 class Annonce
 {
     #[ORM\Id]
@@ -20,8 +24,14 @@ class Annonce
     #[ORM\Column(type: Types::TEXT)]
     private ?string $texte = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $urlimage = null;
+
+    #[Vich\UploadableField(mapping:"annonce_images", fileNameProperty:"urlimage")]
+    /**
+    * @var File
+    */
+    private $image = null;
 
     #[ORM\Column(length: 10)]
     private ?string $codepostal = null;
@@ -67,11 +77,23 @@ class Annonce
         return $this->urlimage;
     }
 
-    public function setUrlimage(string $urlimage): self
+    public function setUrlimage(?string $urlimage): self
     {
         $this->urlimage = $urlimage;
 
         return $this;
+    }
+
+    public function setImage(File $urlimage = null): self
+    {
+        $this->image = $urlimage;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 
     public function getCodepostal(): ?string

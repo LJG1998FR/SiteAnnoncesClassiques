@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ annonce.id }}</td>
-            </tr>
-            <tr>
                 <th>Titre</th>
                 <td>{{ annonce.titre }}</td>
             </tr>
@@ -21,7 +17,7 @@
             </tr>
             <tr>
                 <th>Urlimage</th>
-                <td>{{ annonce.urlimage }}</td>
+                <td><img src="{{ asset('uploads/images/') }}{{ annonce.urlimage }}" alt="{{ annonce.urlimage }}"></td>
             </tr>
             <tr>
                 <th>Telephone</th>

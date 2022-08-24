@@ -6,6 +6,7 @@ use App\Entity\Annonce;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AnnonceType extends AbstractType
 {
@@ -14,7 +15,7 @@ class AnnonceType extends AbstractType
         $builder
             ->add('titre')
             ->add('texte')
-            ->add('urlimage')
+            ->add('image', VichImageType::class)
             ->add('telephone')
             ->add('codepostal')
             ->add('date')

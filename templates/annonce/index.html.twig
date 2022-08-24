@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Titre</th>
                 <th>Texte</th>
                 <th>Urlimage</th>
@@ -21,10 +20,9 @@
         <tbody>
         {% for annonce in annonces %}
             <tr>
-                <td>{{ annonce.id }}</td>
                 <td>{{ annonce.titre }}</td>
                 <td>{{ annonce.texte }}</td>
-                <td>{{ annonce.urlimage }}</td>
+                <td><img src="{{ asset('uploads/images/') }}{{ annonce.urlimage }}" alt="{{ annonce.urlimage }}"></td>
                 <td>{{ annonce.telephone }}</td>
                 <td>{{ annonce.codepostal }}</td>
                 <td>{{ annonce.date ? annonce.date|date('d-m-Y') : '' }}</td>
