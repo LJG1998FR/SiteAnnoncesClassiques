@@ -54,7 +54,7 @@ class AnnonceController extends AbstractController
     public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
         if ( $annonce->getTelephone() != $this->getUser() ) {
-            return $this->redirectToRoute('app_annonce_index');
+            return $this->redirectToRoute('app_accueil');
         }
 
         $form = $this->createForm(AnnonceType::class, $annonce);
@@ -76,7 +76,7 @@ class AnnonceController extends AbstractController
     public function delete(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
     {
         if ( $annonce->getTelephone() != $this->getUser() ) {
-            return $this->redirectToRoute('app_annonce_index');
+            return $this->redirectToRoute('app_accueil');
         }
         if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
             $annonceRepository->remove($annonce, true);

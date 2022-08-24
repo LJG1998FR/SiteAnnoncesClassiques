@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+{% block title %}SiteAnnoncesClassiques{% endblock %}
 
 {% block body %}
-    <h1>Annonce index</h1>
+    <h1>Liste des annonces</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Titre</th>
                 <th>Texte</th>
-                <th>Urlimage</th>
-                <th>Telephone</th>
-                <th>Codepostal</th>
-                <th>Date</th>
+                <th>Photo</th>
+                <th>Téléphone</th>
+                <th>Code postal</th>
+                <th>Publié le:</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,22 +22,22 @@
             <tr>
                 <td>{{ annonce.titre }}</td>
                 <td>{{ annonce.texte }}</td>
-                <td><img src="{{ asset('uploads/images/') }}{{ annonce.urlimage }}" alt="{{ annonce.urlimage }}"></td>
+                <td><img class="img-thumbnail" id="mainphoto" src="{{ asset('uploads/images/') }}{{ annonce.urlimage }}" alt="{{ annonce.urlimage }}"></td>
                 <td>{{ annonce.telephone }}</td>
                 <td>{{ annonce.codepostal }}</td>
                 <td>{{ annonce.date ? annonce.date|date('d-m-Y') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">show</a>
-                    <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
+                {% if annonce.telephone == app.user %}
+                    <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">Modifier l'annonce</a>
+                    <a href="{{ path('app_annonce_delete', {'id': annonce.id}) }}">Supprimer l'annonce</a>
+                {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucune annonce enregistrée.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_annonce_new') }}">Create new</a>
 {% endblock %}
