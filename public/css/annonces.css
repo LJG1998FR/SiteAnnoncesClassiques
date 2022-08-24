@@ -1,0 +1,25 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:0 25%;
+    padding:10px;
+    border:solid black;
+    border-radius: 5px;
+}
+
+.form div{
+    padding-bottom: 10px;
+}
+
+.form div label{
+    margin-right: 10px;
+}
+
+.optionsannonces{
+    display:flex;
+}
+
+.optionsannonces a, .optionsannonces button{
+    margin-left:10px;
+}

@@ -5,6 +5,28 @@
 {% block body %}
     <h1>Liste des annonces</h1>
 
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <div class="alert alert-success">Vous êtes connecté(e), {{ app.user.prenom }} {{ app.user.nom }} ! Bienvenue!</div>
+    {% endif %}
+
+    {% for flashMessage in app.session.flashbag.get('newannonce') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('editannonce') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% for flashMessage in app.session.flashbag.get('deleteannonce') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
     <table class="table">
         <thead>
             <tr>
@@ -38,6 +60,7 @@
                 <td colspan="8">Aucune annonce enregistrée.</td>
             </tr>
         {% endfor %}
+        {{ knp_pagination_render(annonces) }}
         </tbody>
     </table>
 {% endblock %}

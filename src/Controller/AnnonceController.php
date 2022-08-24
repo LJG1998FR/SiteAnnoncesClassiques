@@ -9,18 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/annonce')]
 class AnnonceController extends AbstractController
 {
-    #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
-    public function index(AnnonceRepository $annonceRepository): Response
-    {
-        return $this->render('annonce/index.html.twig', [
-            'annonces' => $annonceRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
     public function new(Request $request, AnnonceRepository $annonceRepository): Response
     {
@@ -33,7 +26,12 @@ class AnnonceController extends AbstractController
             $annonce->setTelephone($this->getUser());
             $annonceRepository->add($annonce, true);
 
-            return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash(
+                'newannonce',
+                'Annonce ajoutée avec succès!'
+            );
+
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('annonce/new.html.twig', [
@@ -63,7 +61,12 @@ class AnnonceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $annonceRepository->add($annonce, true);
 
-            return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash(
+                'editannonce',
+                'Annonce modifiée avec succès!'
+            );
+
+            return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('annonce/edit.html.twig', [
@@ -80,8 +83,12 @@ class AnnonceController extends AbstractController
         }
         if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
             $annonceRepository->remove($annonce, true);
+            $this->addFlash(
+                'deleteannonce',
+                'Annonce supprimée avec succès!'
+            );
         }
 
-        return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_accueil', [], Response::HTTP_SEE_OTHER);
     }
 }

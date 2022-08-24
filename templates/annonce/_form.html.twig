@@ -1,4 +1,9 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="form">
+    {{ form_start(form) }}
+        {{ form_row(form.titre) }}
+        {{ form_row(form.texte) }}
+        {{ form_row(form.image) }}
+        {{ form_row(form.codepostal, {'label' : 'Code Postal'}) }}
+        <button class="btn btn-dark">{{ button_label|default('Ajouter') }}</button>
+    {{ form_end(form) }}
+</div>

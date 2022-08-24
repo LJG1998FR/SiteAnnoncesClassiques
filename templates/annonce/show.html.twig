@@ -3,7 +3,7 @@
 {% block title %}Annonce{% endblock %}
 
 {% block body %}
-    <h1>Annonce</h1>
+    <h1>Détails de l'annonce</h1>
 
     <table class="table">
         <tbody>
@@ -16,27 +16,31 @@
                 <td>{{ annonce.texte }}</td>
             </tr>
             <tr>
-                <th>Urlimage</th>
+                <th>Photo</th>
                 <td><img src="{{ asset('uploads/images/') }}{{ annonce.urlimage }}" alt="{{ annonce.urlimage }}"></td>
             </tr>
             <tr>
-                <th>Telephone</th>
+                <th>Téléphone</th>
                 <td>{{ annonce.telephone }}</td>
             </tr>
             <tr>
-                <th>Codepostal</th>
+                <th>Code postal</th>
                 <td>{{ annonce.codepostal }}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{{ annonce.date ? annonce.date|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Publiée le:</th>
+                <td>{{ annonce.date ? annonce.date|date('d-m-Y') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_annonce_index') }}">back to list</a>
+    <div class="optionsannonces">
+        <a role="button" class="btn btn-dark" href="{{ path('app_accueil') }}">Retour à la liste d'annonces</a>
 
-    <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
+        {% if annonce.telephone == app.user %}
+                <a role="button" class="btn btn-dark" href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">Modifier l'annonce</a>
+                {{ include('annonce/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
 
-    {{ include('annonce/_delete_form.html.twig') }}
 {% endblock %}
