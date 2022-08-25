@@ -1,3 +1,17 @@
+main{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#linksbutton{
+    display:flex;
+    padding:10px;
+}
+
+#linksbutton a{
+    margin-right:5px;
+}
+
 .form{
     display: flex;
     flex-direction: column;
